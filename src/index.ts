@@ -1,10 +1,9 @@
-import { Hono } from 'hono'
+import { Scalar } from '@scalar/hono-api-reference'
+import { Context, Hono } from 'hono'
+import type { GenerateSpecOptions } from 'hono-openapi'
 import { describeRoute, openAPIRouteHandler, resolver, validator } from 'hono-openapi'
 import { z } from 'zod'
 
-const app = new Hono()
-
-// Schemas
 const greetQuerySchema = z.object({
   name: z.string().min(1).optional()
 })
@@ -20,12 +19,39 @@ const createUserBodySchema = z.object({
   email: z.email()
 })
 
-// Root
-app.get('/', c => {
-  return c.text('OK')
-})
+export const openApiDocumentation = {
+  info: {
+    title: 'Hono API',
+    version: '1.0.0',
+    description: 'Example API documented with Scalar.'
+  },
+  servers: [{ url: 'http://localhost:3000' }]
+}
 
-// GET /hello -> text/plain
+export const openApiGenerateSpecOptions: Partial<GenerateSpecOptions> = {
+  documentation: openApiDocumentation,
+  exclude: [/^\/docs/]
+}
+
+const app = new Hono()
+
+app.get(
+  '/docs',
+  describeRoute({ hide: true }),
+  Scalar((c: Context) => ({
+    theme: 'kepler',
+    layout: 'modern',
+    defaultHttpClient: { targetKey: 'js', clientKey: 'axios' },
+    spec: {
+      url: new URL('/docs/open-api', c.req.url).toString()
+    }
+  }))
+)
+
+app.get('/docs/open-api', describeRoute({ hide: true }), openAPIRouteHandler(app, openApiGenerateSpecOptions))
+
+app.get('/', c => c.text('OK'))
+
 app.get(
   '/hello',
   describeRoute({
@@ -46,7 +72,6 @@ app.get(
   }
 )
 
-// POST /users -> application/json
 app.post(
   '/users',
   describeRoute({
@@ -68,7 +93,6 @@ app.post(
   }
 )
 
-// GET /users/:id -> application/json
 app.get(
   '/users/:id',
   describeRoute({
@@ -86,25 +110,10 @@ app.get(
   validator('param', z.object({ id: z.uuid() })),
   c => {
     const { id } = c.req.valid('param')
-    // Example: return a mock user
     const user = { id, name: 'Jane Doe', email: 'jane@example.com' }
     return c.json(user)
   }
 )
 
-// OpenAPI document
-app.get(
-  '/openapi',
-  openAPIRouteHandler(app, {
-    documentation: {
-      info: {
-        title: 'Hono API',
-        version: '1.0.0',
-        description: 'Demo API with Zod validation and hono-openapi'
-      },
-      servers: [{ url: 'http://localhost:3000', description: 'Local Server' }]
-    }
-  })
-)
-
 export default app
+export type AppType = typeof app

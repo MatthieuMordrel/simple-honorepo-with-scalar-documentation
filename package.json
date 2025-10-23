@@ -1,10 +1,13 @@
 {
   "name": "hono-openapi-testing",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot src/index.ts",
+    "docs:gen": "bun run scripts/generate-docs.ts"
   },
   "dependencies": {
     "@hono/standard-validator": "^0.1.5",
+    "@rcmade/hono-docs": "^1.0.30",
+    "@scalar/hono-api-reference": "^0.9.22",
     "hono": "^4.10.2",
     "hono-openapi": "^1.1.0",
     "zod": "^4.1.12"
