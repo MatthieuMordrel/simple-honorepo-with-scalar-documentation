@@ -1,0 +1,6 @@
+export { AddTodoFormConnected } from './AddTodoFormConnected'
+export { ClearCompletedButtonConnected } from './ClearCompletedButtonConnected'
+export { TodoCounterConnected } from './TodoCounterConnected'
+export { TodoFilterConnected } from './TodoFilterConnected'
+export { TodoListConnected } from './TodoListConnected'
+export { TodoStatsConnected } from './TodoStatsConnected'

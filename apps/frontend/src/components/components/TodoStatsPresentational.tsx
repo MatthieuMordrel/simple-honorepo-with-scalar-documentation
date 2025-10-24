@@ -1,7 +1,8 @@
 /**
- * Component responsible for displaying detailed statistics about todos
+ * Presentational component for displaying detailed statistics about todos
+ * Takes props only, no hooks or store access
  */
-export const TodoStats = ({ total, active, completed }: { total: number; active: number; completed: number }) => {
+export const TodoStatsPresentational = ({ total, active, completed }: { total: number; active: number; completed: number }) => {
   return (
     <div className='todo-stats'>
       <h2>Statistics</h2>

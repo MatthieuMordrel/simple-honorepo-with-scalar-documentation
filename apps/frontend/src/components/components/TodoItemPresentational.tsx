@@ -1,9 +1,18 @@
-import type { Todo } from '../stores/todoStore'
+import type { Todo } from '../../stores/types'
 
 /**
- * Component responsible for displaying a single todo item and its actions
+ * Presentational component for displaying a single todo item and its actions
+ * Takes props only, no hooks or store access
  */
-export const TodoItem = ({ todo, onToggle, onDelete }: { todo: Todo; onToggle: (id: string) => void; onDelete: (id: string) => void }) => {
+export const TodoItemPresentational = ({
+  todo,
+  onToggle,
+  onDelete
+}: {
+  todo: Todo
+  onToggle: (id: string) => void
+  onDelete: (id: string) => void
+}) => {
   return (
     <li className={`todo-item ${todo.completed ? 'completed' : ''}`}>
       <div className='todo-content'>

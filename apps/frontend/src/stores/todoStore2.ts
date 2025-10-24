@@ -1,35 +1,8 @@
 import { create } from 'zustand'
+import type { TodoStore } from './types'
 
-// Types for our todo items
-export interface Todo {
-  id: string
-  title: string
-  completed: boolean
-  createdAt: Date
-}
-
-// Store state interface
-interface TodoState {
-  todos: Todo[]
-  filter: 'all' | 'active' | 'completed'
-}
-
-// Actions interface
-interface TodoActions {
-  addTodo: (title: string) => void
-  toggleTodo: (id: string) => void
-  deleteTodo: (id: string) => void
-  setFilter: (filter: 'all' | 'active' | 'completed') => void
-  clearCompleted: () => void
-}
-
-// Combined store type
-type TodoStore = TodoState & {
-  actions: TodoActions
-}
-
-// Create the store (not exported directly)
-const useTodoStore = create<TodoStore>(set => ({
+// Create the store for Dashboard 2
+const useTodoStore2 = create<TodoStore>(set => ({
   // State
   todos: [],
   filter: 'all',
@@ -69,16 +42,16 @@ const useTodoStore = create<TodoStore>(set => ({
 }))
 
 // Export atomic selectors for state
-export const useTodos = () => useTodoStore(state => state.todos)
-export const useFilter = () => useTodoStore(state => state.filter)
+export const useTodos2 = () => useTodoStore2(state => state.todos)
+export const useFilter2 = () => useTodoStore2(state => state.filter)
 
 // Export actions as a single hook
-export const useTodoActions = () => useTodoStore(state => state.actions)
+export const useTodoActions2 = () => useTodoStore2(state => state.actions)
 
 // Computed selectors
-export const useFilteredTodos = () => {
-  const todos = useTodos()
-  const filter = useFilter()
+export const useFilteredTodos2 = () => {
+  const todos = useTodos2()
+  const filter = useFilter2()
 
   return todos.filter(todo => {
     if (filter === 'active') return !todo.completed
@@ -87,8 +60,8 @@ export const useFilteredTodos = () => {
   })
 }
 
-export const useTodoStats = () => {
-  const todos = useTodos()
+export const useTodoStats2 = () => {
+  const todos = useTodos2()
 
   return {
     total: todos.length,

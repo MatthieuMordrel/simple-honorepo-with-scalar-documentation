@@ -1,7 +1,8 @@
 /**
- * Component responsible for filtering todos by status
+ * Presentational component for filtering todos by status
+ * Takes props only, no hooks or store access
  */
-export const TodoFilter = ({
+export const TodoFilterPresentational = ({
   filter,
   onFilterChange
 }: {
@@ -11,6 +12,7 @@ export const TodoFilter = ({
   return (
     <div className='todo-filter'>
       <h2>Filter Todos</h2>
+      <p>This should not re-render when a todo is added or deleted, only when the filter is changed</p>
       <div className='filter-buttons'>
         <button onClick={() => onFilterChange('all')} className={`filter-button ${filter === 'all' ? 'active' : ''}`}>
           All

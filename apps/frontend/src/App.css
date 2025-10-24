@@ -1,7 +1,16 @@
+/* App Container */
+.app-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  width: 100%;
+  overflow-x: auto;
+}
+
 /* Dashboard Layout */
 .dashboard {
-  max-width: 1200px;
-  margin: 0 auto;
+  flex: 1;
+  min-width: 600px;
   padding: 2rem;
 }
 

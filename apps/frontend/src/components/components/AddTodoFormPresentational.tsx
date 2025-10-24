@@ -1,9 +1,10 @@
 import { useState } from 'react'
 
 /**
- * Component responsible for adding new todos to the store
+ * Presentational component for adding new todos
+ * Takes props only, no hooks or store access
  */
-export const AddTodoForm = ({ onAddTodo }: { onAddTodo: (title: string) => void }) => {
+export const AddTodoFormPresentational = ({ onAddTodo }: { onAddTodo: (title: string) => void }) => {
   const [input, setInput] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
