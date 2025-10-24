@@ -1,2 +1,10 @@
-# deps
+# dependencies & build artifacts
 node_modules/
+pnpm-lock.yaml
+pnpm-debug.log
+
+# generated assets
+apps/backend/openapi/
+
+# editor
+.DS_Store
