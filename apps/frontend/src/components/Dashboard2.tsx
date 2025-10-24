@@ -1,9 +1,11 @@
-import { AddTodoFormConnected } from './connected/AddTodoFormConnected'
-import { ClearCompletedButtonConnected } from './connected/ClearCompletedButtonConnected'
-import { TodoCounterConnected } from './connected/TodoCounterConnected'
-import { TodoFilterConnected } from './connected/TodoFilterConnected'
-import { TodoListConnected } from './connected/TodoListConnected'
-import { TodoStatsConnected } from './connected/TodoStatsConnected'
+import {
+  AddTodoFormConnected,
+  ClearCompletedButtonConnected,
+  TodoCounterConnected,
+  TodoFilterConnected,
+  TodoListConnected,
+  TodoStatsConnected
+} from './dashboard2wrappers'
 
 /**
  * Dashboard 2: New pattern with tiny wrapper components
